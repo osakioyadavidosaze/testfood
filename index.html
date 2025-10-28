@@ -203,8 +203,7 @@
         let cart = [];
         let cartTotal = 0;
 
-        // Initialize EmailJS (replace with your keys)
-        emailjs.init('YOUR_PUBLIC_KEY');
+        // Email functionality using mailto
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -365,54 +364,40 @@
                 return;
             }
             
-            try {
-                const orderNumber = 'SYN' + Date.now().toString().slice(-6);
-                const itemsList = cart.map(item => `${item.product} x${item.quantity}kg - ₦${item.total.toLocaleString()}`).join('\n');
+            const orderNumber = 'SYN' + Date.now().toString().slice(-6);
+            const itemsList = cart.map(item => `${item.product} x${item.quantity}kg - ₦${item.total.toLocaleString()}`).join('\n');
+            
+            // Create email content
+            const subject = `🍠 New Order #${orderNumber} - Synergy Food`;
+            const body = `Dear Synergy Food Team,\n\nYou have received a new order!\n\n📋 ORDER DETAILS:\nOrder Number: ${orderNumber}\nDate: ${new Date().toLocaleString()}\n\n👤 CUSTOMER INFO:\nName: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\nAddress: ${address}\n\n🛒 ORDER ITEMS:\n${itemsList}\n\n💰 TOTAL: ₦${cartTotal.toLocaleString()}\n\n🚚 DELIVERY: ${delivery}\n💳 PAYMENT: ${payment}\n\nPlease contact the customer within 30 minutes to confirm delivery.\n\nBest regards,\nSynergy Food Website`;
+            
+            // Open email client
+            const mailtoLink = `mailto:osazedavid969@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink, '_blank');
+            
+            statusDiv.innerHTML = `
+                <div style="color: #28a745; padding: 15px; background: #d4edda; border-radius: 5px;">
+                    🎉 <strong>Order Confirmed!</strong><br>
+                    Order #: ${orderNumber}<br>
+                    📧 Email client opened - please send the email<br>
+                    📞 We'll call you within 30 minutes
+                </div>
+            `;
+            
+            cart = [];
+            updateCartDisplay();
+            this.reset();
                 
-                const emailData = {
-                    to_email: 'osazedavid969@gmail.com',
-                    order_number: orderNumber,
-                    customer_name: name,
-                    customer_phone: phone,
-                    customer_email: email || 'Not provided',
-                    customer_address: address,
-                    delivery_option: delivery,
-                    payment_method: payment,
-                    order_items: itemsList,
-                    order_total: `₦${cartTotal.toLocaleString()}`,
-                    order_date: new Date().toLocaleString()
-                };
-                
-                // Replace with your EmailJS service and template IDs
-                await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData);
-                
-                statusDiv.innerHTML = `
-                    <div style="color: #28a745; padding: 15px; background: #d4edda; border-radius: 5px;">
-                        🎉 <strong>Order Confirmed!</strong><br>
-                        Order #: ${orderNumber}<br>
-                        📧 Email sent to osazedavid969@gmail.com<br>
-                        📞 We'll call you within 30 minutes
-                    </div>
-                `;
-                
-                cart = [];
-                updateCartDisplay();
-                this.reset();
-                
-            } catch (error) {
+            
+            // Also open WhatsApp as backup
+            setTimeout(() => {
                 const itemsList = cart.map(item => `${item.product} x${item.quantity}kg - ₦${item.total.toLocaleString()}`).join('\n');
                 const whatsappMessage = `🍠 NEW ORDER - Synergy Food\n\nOrder #: SYN${Date.now().toString().slice(-6)}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\nAddress: ${address}\nDelivery: ${delivery}\nPayment: ${payment}\n\nITEMS:\n${itemsList}\n\nTOTAL: ₦${cartTotal.toLocaleString()}`;
                 
                 const whatsappUrl = `https://wa.me/2348123456789?text=${encodeURIComponent(whatsappMessage)}`;
                 window.open(whatsappUrl, '_blank');
                 
-                statusDiv.innerHTML = `
-                    <div style="color: #ffc107; padding: 15px; background: #fff3cd; border-radius: 5px;">
-                        ⚠️ <strong>Email failed, WhatsApp opened instead</strong><br>
-                        Please complete your order via WhatsApp
-                    </div>
-                `;
-            }
+            }, 2000);
             
             submitBtn.textContent = 'Place Order';
             submitBtn.disabled = false;
