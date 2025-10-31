@@ -101,26 +101,26 @@
                 <div class="product-card">
                     <div class="product-image">🥔</div>
                     <h3>Potato Flour (Big)</h3>
-                    <div class="price">₦4,500/kg</div>
+                    <div class="price">₦3,000/kg</div>
                     <div class="stock">✅ In Stock (25kg available)</div>
                     <p>Coarse ground potato flour, perfect for traditional fufu</p>
-                    <div class="bulk-discount">💰 5kg+: ₦4,200/kg</div>
+                    <div class="bulk-discount">💰 2kg: ₦3,000 total</div>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.8/5)</div>
-                    <input type="number" class="qty-input" min="1" value="1" data-product="Potato Flour Big" data-price="4500" onchange="updatePreview(this)">
-                    <div class="item-total">Subtotal: ₦4,500</div>
-                    <button class="add-to-cart" onclick="addToCart('Potato Flour Big', 4500)">Add to Cart</button>
+                    <input type="number" class="qty-input" min="1" value="1" data-product="Potato Flour Big" data-price="3000" onchange="updatePreview(this)">
+                    <div class="item-total">Subtotal: ₦3,000</div>
+                    <button class="add-to-cart" onclick="addToCart('Potato Flour Big', 3000)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">🥔</div>
                     <h3>Potato Flour (Small)</h3>
-                    <div class="price">₦5,000/kg</div>
-                    <div class="stock">✅ In Stock (18kg available)</div>
+                    <div class="price">₦1,500/kg</div>
+                    <div class="stock">✅ In Stock (10kg available)</div>
                     <p>Fine ground potato flour, smooth texture for delicate dishes</p>
-                    <div class="bulk-discount">💰 5kg+: ₦4,700/kg</div>
+                    <div class="bulk-discount">💰 5kg+: ₦1,200/kg discount price</div>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.9/5)</div>
-                    <input type="number" class="qty-input" min="1" value="1" data-product="Potato Flour Small" data-price="5000" onchange="updatePreview(this)">
-                    <div class="item-total">Subtotal: ₦5,000</div>
-                    <button class="add-to-cart" onclick="addToCart('Potato Flour Small', 5000)">Add to Cart</button>
+                    <input type="number" class="qty-input" min="1" value="1" data-product="Potato Flour Small" data-price="1500" onchange="updatePreview(this)">
+                    <div class="item-total">Subtotal: ₦1,500</div>
+                    <button class="add-to-cart" onclick="addToCart('Potato Flour Small', 1500)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">🌾</div>
@@ -168,12 +168,12 @@
             <div id="price-calculator">
                 <h3>Price Calculator</h3>
                 <select id="calc-product">
-                    <option value="4500">Potato Flour (Big) - ₦4,500/kg</option>
-                    <option value="5000">Potato Flour (Small) - ₦5,000/kg</option>
+                    <option value="1500">Potato Flour (Small) - ₦1,500/kg</option>
+                    <option value="3000">Potato Flour (Big) - ₦3,000/kg</option>
                     <option value="3200">Premium Garri - ₦3,200/kg</option>
                 </select>
                 <input type="number" id="calc-qty" placeholder="Quantity (kg)" min="1" value="1">
-                <div id="calc-result">Total: ₦4,500</div>
+                <div id="calc-result">Total: ₦3,000</div>
             </div>
             <form id="order-form">
                 <input type="text" placeholder="Your Name" required>
